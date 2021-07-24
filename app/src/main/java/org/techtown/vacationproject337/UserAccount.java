@@ -3,4 +3,5 @@ package org.techtown.vacationproject337;
 public class UserAccount {
     public String name;
     public String email;
+    public String uid;
 }
