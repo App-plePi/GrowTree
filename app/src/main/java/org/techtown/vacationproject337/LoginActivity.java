@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,13 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.techtown.vacationproject337.databinding.ActivityJoinBinding;
 import org.techtown.vacationproject337.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth mAuth;
     boolean isEmail = false;
     boolean isPwd = false;
     @Override
@@ -30,7 +33,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        firebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        SharedPreferences sf = getSharedPreferences("Login", MODE_PRIVATE);
+        String loginEmail = sf.getString("inputEmail", null);
+        String loginPwd = sf.getString("inputPwd", null);
 
         binding.etEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -59,27 +65,37 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
                 startActivity(intent);
         });
-        binding.btnLogin.setOnClickListener(v -> {
-            if(isEmail&&isPwd){
-                String email = binding.etEmail.getText().toString();
-                String pwd = binding.etPwd.getText().toString();
-                firebaseAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Intent intent =new Intent(LoginActivity.this, MainActivity2.class);
-                            startActivity(intent);
-                        }
-                        else Toast.makeText(getApplicationContext(), "로그인오류", Toast.LENGTH_SHORT).show();
-                        //어디서 틀려서 로그인 안돼는지 알려주기
-                    }
-                });
-            }
-            else {
-                if(!isEmail&&!isPwd) Toast.makeText(getApplicationContext(), "정보를 입력해주세요", Toast.LENGTH_SHORT).show();
-                else if(!isEmail)Toast.makeText(getApplicationContext(), "이메일을 입력해주세요", Toast.LENGTH_SHORT).show();
-                else if(!isPwd)Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+
+        if(loginEmail != null&&loginPwd!=null){
+            Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
+            startActivity(intent);
+            finish();
         }
-        });
+        else {
+            binding.btnLogin.setOnClickListener(v -> {
+                if (isEmail && isPwd) {
+                    String email = binding.etEmail.getText().toString();
+                    String pwd = binding.etPwd.getText().toString();
+                    mAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
+                                startActivity(intent);
+                            } else
+                                Toast.makeText(getApplicationContext(), "로그인오류", Toast.LENGTH_SHORT).show();
+                            //어디서 틀려서 로그인 안돼는지 알려주기
+                        }
+                    });
+                } else {
+                    if (!isEmail && !isPwd)
+                        Toast.makeText(getApplicationContext(), "정보를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    else if (!isEmail)
+                        Toast.makeText(getApplicationContext(), "이메일을 입력해주세요", Toast.LENGTH_SHORT).show();
+                    else if (!isPwd)
+                        Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
