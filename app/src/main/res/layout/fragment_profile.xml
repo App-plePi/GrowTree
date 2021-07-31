@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.HomeFragment">
     <LinearLayout
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:orientation="horizontal"
@@ -43,7 +44,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="로그아웃" />
+
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@drawable/line"
+        app:layout_constraintTop_toBottomOf="@id/layout1"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
