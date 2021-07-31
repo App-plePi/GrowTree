@@ -8,6 +8,10 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.techtown.vacationproject337.Fragment.AboutFragment;
+import org.techtown.vacationproject337.Fragment.HomeFragment;
+import org.techtown.vacationproject337.Fragment.ProfileFragment;
+
 public class MainActivity2 extends AppCompatActivity {
     private BottomNavigationView mBottomNavigationView;
 
