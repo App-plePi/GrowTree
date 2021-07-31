@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        else {
+        else if(loginEmail == null&&loginPwd==null){
             binding.btnLogin.setOnClickListener(v -> {
                 if (isEmail && isPwd) {
                     String email = binding.etEmail.getText().toString();
@@ -80,8 +80,15 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                SharedPreferences sf = getSharedPreferences("Login", MODE_PRIVATE);
+                                SharedPreferences.Editor autoLogin = sf.edit();
+                                autoLogin.putString("inputEmail", email);
+                                autoLogin.putString("inputPwd", pwd);
+                                autoLogin.commit();
+
                                 Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
                                 startActivity(intent);
+                                finish();
                             } else
                                 Toast.makeText(getApplicationContext(), "로그인오류", Toast.LENGTH_SHORT).show();
                             //어디서 틀려서 로그인 안돼는지 알려주기
