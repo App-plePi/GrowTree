@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.techtown.vacationproject337.LoginActivity;
 import org.techtown.vacationproject337.R;
+import org.techtown.vacationproject337.SettingActivity;
 import org.techtown.vacationproject337.UserAccount;
 import org.techtown.vacationproject337.databinding.FragmentProfileBinding;
 
@@ -49,9 +50,12 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         });
+        binding.layout.setOnClickListener(v1 -> {
+            Intent intent = new Intent(getActivity(), SettingActivity.class);
+            startActivity(intent);
+        });
         return v;
     }
-
     @Override
     public void onStart() {
         super.onStart();
