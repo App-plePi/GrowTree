@@ -43,6 +43,7 @@ public class JoinActivity extends AppCompatActivity {
         setContentView(binding.getRoot()); // 2
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
+        ProgressDialog progressDialog = new ProgressDialog(JoinActivity.this);
         mAuth = FirebaseAuth.getInstance();
 
         binding.etName.addTextChangedListener(new TextWatcher() {
@@ -120,6 +121,9 @@ public class JoinActivity extends AppCompatActivity {
         });
 
         binding.btnJjoin.setOnClickListener(v -> {
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("처리중입니다..");
+            progressDialog.show();
             if(isName&&isEmail&&isPwd){
                 String name = binding.etName.getText().toString();
                 String email = binding.etUserEmail.getText().toString();
@@ -132,11 +136,13 @@ public class JoinActivity extends AppCompatActivity {
                             String Uid = user.getUid();
                             UserAccount account = new UserAccount(name, email, Uid);
                             databaseReference.child("User").child(Uid).setValue(account);
+                            progressDialog.dismiss();
                             Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
                             startActivity(intent);
 
                         }
                         else {
+                            progressDialog.dismiss();
                             Toast.makeText(JoinActivity.this, "등록 에러", Toast.LENGTH_SHORT).show();
                             return;
                         }

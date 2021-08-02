@@ -89,8 +89,8 @@ public class SettingActivity extends AppCompatActivity {
                             else{
                                 binding.tvErrorPwdch.setText("");
                                 binding.etPwdch.setBackgroundResource(R.drawable.edit);
-                                if(binding.etPwdch.getText().toString()!=null) isPwd=true;
-                                else  isPwd=false;
+                                if(s!=null)isPwd=true;
+                                else isPwd=false;
                             }
                         }
 

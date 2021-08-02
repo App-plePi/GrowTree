@@ -1,5 +1,7 @@
 package org.techtown.vacationproject337.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,13 +44,19 @@ public class ProfileFragment extends Fragment {
         View v = binding.getRoot();
 
         binding.btnLogout.setOnClickListener(v1 -> {
-            SharedPreferences sf = this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
-            SharedPreferences.Editor autoLogin = sf.edit();
-            autoLogin.putString("inputEmail", null);
-            autoLogin.putString("inputPwd", null);
-            autoLogin.commit();
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("로그아웃");
+            builder.setMessage("로그아웃을 하시겠습니까?");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    PreferencesManager();
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("아니오", null);
+            builder.show();
         });
         binding.layout.setOnClickListener(v1 -> {
             Intent intent = new Intent(getActivity(), SettingActivity.class);
@@ -56,6 +64,14 @@ public class ProfileFragment extends Fragment {
         });
         return v;
     }
+    public void PreferencesManager(){
+        SharedPreferences sf = this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor autoLogin = sf.edit();
+        autoLogin.putString("inputEmail", null);
+        autoLogin.putString("inputPwd", null);
+        autoLogin.commit();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
