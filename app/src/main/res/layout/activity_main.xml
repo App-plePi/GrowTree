@@ -6,13 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="첫시작화면\n로고들어갈곳"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <TextView
+       android:id="@+id/text_userTree_main"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="000의\n나무키우기"
+       android:textSize="30dp"
+       android:gravity="center"
+       android:layout_marginBottom="500dp"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:layout_marginTop="50dp"/>
+
+   <com.dinuscxj.progressbar.CircleProgressBar
+       android:id="@+id/progress_circle_main"
+       android:layout_width="300dp"
+       android:layout_height="300dp"
+       app:progress_text_size="50sp"
+       app:style="solid_line"
+       app:progress_stroke_width="20dp "
+       app:progress_stroke_cap="round"
+       app:progress_start_color="#FFBB00"
+       app:progress_end_color="#ABF200"
+       android:layout_marginTop="40dp"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/text_userTree_main"/>
+
+   <TextView
+      android:id="@+id/timer_main"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+      android:text="00 : 00"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/progress_circle_main"
+       android:layout_marginTop="40dp"
+       android:textSize="30dp" />
+
+   <Button
+       android:id="@+id/startBtn_main"
+       android:layout_width="300dp"
+       android:layout_height="wrap_content"
+       android:text="start"
+       android:background="@color/white"
+       android:elevation="50dp"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/timer_main"
+       android:layout_marginTop="80dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
