@@ -36,6 +36,7 @@ public class ProfileFragment extends Fragment {
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference nameRef = databaseReference.child("User").child(uid).child("name");
     DatabaseReference emailRef = databaseReference.child("User").child(uid).child("email");
+    DatabaseReference profileRef = databaseReference.child("User").child(uid).child("profile");
 
     @Nullable
     @Override
@@ -96,6 +97,21 @@ public class ProfileFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.tvEmail.setText("불러오기 오류");
             }
+        });
+        profileRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int profile = snapshot.getValue(int.class);
+                switch (profile){
+                    case 1: binding.profile.setImageResource(R.drawable.profile1);break;
+                    case 2: binding.profile.setImageResource(R.drawable.profile2);break;
+                    case 3: binding.profile.setImageResource(R.drawable.profile3);break;
+                    case 4: binding.profile.setImageResource(R.drawable.profile4);break;
+                    case 5: binding.profile.setImageResource(R.drawable.profile5);break;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) { }
         });
 
     }

@@ -55,6 +55,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/profile1"
+                android:onClick="profile"
                 android:scaleType="centerCrop"/>
             <ImageButton
                 android:id="@+id/p2"
@@ -62,6 +63,7 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/profile2"
+                android:onClick="profile"
                 android:scaleType="centerCrop"/>
             <ImageButton
                 android:id="@+id/p3"
@@ -69,6 +71,7 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/profile3"
+                android:onClick="profile"
                 android:scaleType="centerCrop"/>
             <ImageButton
                 android:id="@+id/p4"
@@ -76,6 +79,7 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/profile4"
+                android:onClick="profile"
                 android:scaleType="centerCrop"/>
             <ImageButton
                 android:id="@+id/p5"
@@ -83,6 +87,7 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/profile5"
+                android:onClick="profile"
                 android:scaleType="centerCrop"/>
         </LinearLayout>
     </HorizontalScrollView>
