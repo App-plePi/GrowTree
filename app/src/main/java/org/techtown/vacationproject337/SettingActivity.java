@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -38,7 +39,21 @@ public class SettingActivity extends AppCompatActivity {
     DatabaseReference emailRef = databaseReference.child("User").child(uid).child("email");
     DatabaseReference profileRef = databaseReference.child("User").child(uid).child("profile");
     boolean isName = false;
-    ImageView.OnClickListener mListener;
+    int profile;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        profileRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                profile = snapshot.getValue(int.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +62,6 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
-        binding.p1.setOnClickListener(mListener);
-        binding.p2.setOnClickListener(mListener);
-        binding.p3.setOnClickListener(mListener);
-        binding.p4.setOnClickListener(mListener);
-        binding.p5.setOnClickListener(mListener);
-
-
 
         binding.back.setOnClickListener(v -> {
             Intent intent = new Intent(SettingActivity.this, MainActivity2.class);
@@ -78,18 +86,7 @@ public class SettingActivity extends AppCompatActivity {
             if(isName){
                 String name = binding.etName.getText().toString();
                 nameRef.setValue(name);
-                mListener = new ImageView.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        switch (v.getId()){
-                            case R.id.p1: profileRef.setValue(1); break;
-                            case R.id.p2: profileRef.setValue(2); break;
-                            case R.id.p3: profileRef.setValue(3); break;
-                            case R.id.p4: profileRef.setValue(4); break;
-                            case R.id.p5: profileRef.setValue(5); break;
-                        }
-                    }
-                };
+                profileRef.setValue(profile);
                 Intent intent = new Intent(SettingActivity.this, MainActivity2.class);
                 startActivity(intent);
             }

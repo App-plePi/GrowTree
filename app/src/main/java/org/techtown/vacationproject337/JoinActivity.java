@@ -35,6 +35,7 @@ public class JoinActivity extends AppCompatActivity {
     boolean isName = false;
     boolean isEmail = false;
     boolean isPwd = false;
+    int profile = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +129,7 @@ public class JoinActivity extends AppCompatActivity {
                 String name = binding.etName.getText().toString();
                 String email = binding.etUserEmail.getText().toString();
                 String pwd = binding.etUserPwd.getText().toString();
-                int profile = 1;
+
                 mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(JoinActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
