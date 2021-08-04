@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.HomeFragment"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
+        android:id="@+id/text_userTree_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="000의\n나무키우기"
+        android:textSize="30dp"
+        android:fontFamily="@font/app_main_font"
+        android:gravity="center"
+        android:layout_marginTop="50dp"/>
 
-</FrameLayout>
+    <com.dinuscxj.progressbar.CircleProgressBar
+        android:id="@+id/progress_circle_main"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:progress_text_size="50dp"
+        app:progress_text_color="#8BC34A"
+        app:style="solid_line"
+        app:progress_stroke_width="20dp"
+        app:progress_stroke_cap="round"
+        app:progress_start_color="#4CAF50"
+        app:progress_end_color="#A0E353"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/timer_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00 : 00"
+        android:layout_marginTop="40dp"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/startBtn_main"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="start"
+        android:background="@color/white"
+        android:elevation="50dp"
+        android:layout_marginTop="80dp"/>
+
+</LinearLayout>
