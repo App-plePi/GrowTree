@@ -20,8 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.techtown.vacationproject337.databinding.ActivityJoinBinding;
 import org.techtown.vacationproject337.databinding.ActivityLoginBinding;
+
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;

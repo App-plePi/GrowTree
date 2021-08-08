@@ -50,45 +50,75 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <ImageButton
-                android:id="@+id/p1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/profile1"
-                android:onClick="profile"
-                android:scaleType="centerCrop"/>
-            <ImageButton
-                android:id="@+id/p2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/profile2"
-                android:onClick="profile"
-                android:scaleType="centerCrop"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="40dp">
+                <ImageButton
+                    android:id="@+id/p1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#00ff0000"
+                    android:src="@drawable/profile1"
+                    android:onClick="profile"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="40dp"
+                android:layout_marginLeft="5dp">
+                <ImageButton
+                    android:id="@+id/p2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#00ff0000"
+                    android:src="@drawable/profile2"
+                    android:onClick="profile"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="40dp"
+                android:layout_marginLeft="5dp">
             <ImageButton
                 android:id="@+id/p3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginLeft="5dp"
+                android:background="#00ff0000"
                 android:src="@drawable/profile3"
                 android:onClick="profile"
                 android:scaleType="centerCrop"/>
-            <ImageButton
-                android:id="@+id/p4"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/profile4"
-                android:onClick="profile"
-                android:scaleType="centerCrop"/>
-            <ImageButton
-                android:id="@+id/p5"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/profile5"
-                android:onClick="profile"
-                android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="40dp"
+                android:layout_marginLeft="5dp">
+                <ImageButton
+                    android:id="@+id/p4"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#00ff0000"
+                    android:src="@drawable/profile4"
+                    android:onClick="profile"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="40dp"
+                android:layout_marginLeft="5dp">
+                <ImageButton
+                    android:id="@+id/p5"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#00ff0000"
+                    android:src="@drawable/profile5"
+                    android:onClick="profile"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </HorizontalScrollView>
 
