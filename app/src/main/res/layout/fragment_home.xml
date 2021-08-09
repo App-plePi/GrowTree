@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.HomeFragment"
-    android:orientation="vertical"
     android:gravity="center">
 
     <TextView
@@ -16,7 +15,10 @@
         android:textSize="30dp"
         android:fontFamily="@font/app_main_font"
         android:gravity="center"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.dinuscxj.progressbar.CircleProgressBar
         android:id="@+id/progress_circle_main"
@@ -29,7 +31,10 @@
         app:progress_stroke_cap="round"
         app:progress_start_color="#4CAF50"
         app:progress_end_color="#A0E353"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_userTree_main"/>
 
     <TextView
         android:id="@+id/timer_main"
@@ -37,7 +42,10 @@
         android:layout_height="wrap_content"
         android:text="00 : 00"
         android:layout_marginTop="40dp"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_circle_main" />
 
     <Button
         android:id="@+id/startBtn_main"
@@ -46,6 +54,22 @@
         android:text="start"
         android:background="@color/white"
         android:elevation="50dp"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="80dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer_main"
+        android:visibility="visible" />
+    <Button
+        android:id="@+id/endBtn_main"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="stop"
+        android:background="@color/white"
+        android:elevation="50dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer_main"
+        android:visibility="gone"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
