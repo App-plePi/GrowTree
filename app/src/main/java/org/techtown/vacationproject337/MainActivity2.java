@@ -19,6 +19,7 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
         mBottomNavigationView=findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().add(R.id.frame_view,new HomeFragment()).commit();
 
