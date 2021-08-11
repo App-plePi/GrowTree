@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.annotation.UiThread
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -19,8 +20,15 @@ import java.util.*
 import kotlin.concurrent.timer
 
 class HomeFragment : Fragment() {
+    private var time = 0
+    private var timerTask : Timer? = null
+    lateinit var mainActivity2: MainActivity2
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
+        mainActivity2 = context as MainActivity2
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -29,6 +37,7 @@ class HomeFragment : Fragment() {
         binding.startBtnMain.setOnClickListener{
             binding.startBtnMain.visibility = View.GONE
             binding.endBtnMain.visibility = View.VISIBLE
+            startTimer()
         }
         binding.endBtnMain.setOnClickListener {
             binding.startBtnMain.visibility = View.VISIBLE
@@ -38,6 +47,14 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun startTimer() {
+        timerTask = timer(period = 10){
+            time++
+            val sec = time/100
+            val milli = time%100
 
 
+        }
+
+    }
 }

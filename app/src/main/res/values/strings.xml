@@ -2,4 +2,10 @@
     <string name="app_name">VacationProject337</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tree01">tree01</string>
+    <string name="tree02">tree02</string>
+    <string name="tree03">tree03</string>
+    <string name="tree04">tree04</string>
+    <string name="tree05">tree05</string>
 </resources>
