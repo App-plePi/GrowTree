@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2">
+    tools:context=".MainActivity2"
+    android:background="@drawable/background">
 
     <FrameLayout
         android:id="@+id/frame_view"
@@ -17,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="unlabeled"
-        android:background="@android:color/white"
+        android:background="@drawable/background"
         app:menu="@menu/bottom_nav"/>
 </RelativeLayout>
