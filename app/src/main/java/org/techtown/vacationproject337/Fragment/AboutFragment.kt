@@ -1,6 +1,7 @@
 package org.techtown.vacationproject337.Fragment
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,15 +32,12 @@ class AboutFragment : Fragment() {
             Tree("treename5",R.drawable.man)
         )
 
-        val view:View = inflater.inflate(R.layout.fragment_about, container, false)
-        val recycler:RecyclerView = view.findViewById(R.id.recycler)
         //val linearLayoutManager by lazy { LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false) }
 
-        recycler.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false) //오류
         //recycler.layoutManager = linearLayoutManager // 프래그먼트에서는 context 사용 불가
-        recycler.setHasFixedSize(true)
 
-        recycler.adapter = RecyclerAdapter(treelist)
+        binding.recycler.adapter = RecyclerAdapter(treelist)
+        Log.d(TAG, "onCreateView: ${binding.recycler.adapter}아잉")
 
         return binding.root
     }

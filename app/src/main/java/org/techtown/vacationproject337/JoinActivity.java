@@ -47,6 +47,8 @@ public class JoinActivity extends AppCompatActivity {
         ProgressDialog progressDialog = new ProgressDialog(JoinActivity.this);
         mAuth = FirebaseAuth.getInstance();
 
+        
+
         binding.etName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

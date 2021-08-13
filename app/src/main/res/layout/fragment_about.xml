@@ -21,8 +21,9 @@
        android:id="@+id/recycler"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-       tools:listitem="@layout/item_aboutrecycler"/>
+       app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+       tools:listitem="@layout/item_aboutrecycler"
+       app:spanCount="2"/>
 
 
 
