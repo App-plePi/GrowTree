@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -18,19 +19,24 @@ import kotlin.concurrent.timer
 
 class HomeFragment : Fragment() {
 
-    private var time = 0
+    private var time = 360000
+    private var time1:Int = time
     private var timerTask : Timer? = null
+    private var treeN = 0
+    private var time_dou:Double = 0.0
+    private var time1_dou:Double = 0.0
+    private var t_dou:Double = 0.0
     private lateinit var firebaseDb:FirebaseDatabase
     private lateinit var auth:FirebaseAuth
+    private lateinit var binding:FragmentHomeBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentHomeBinding.inflate(inflater,container,false)
         val v: View = binding.getRoot()
         firebaseDb = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
         val uid:String = auth.uid.toString()
-
         
         firebaseDb.reference.child("User").child(uid).child("name").get()
             .addOnSuccessListener { Log.d(TAG, "onCreateView: ${it.value}")
@@ -39,7 +45,7 @@ class HomeFragment : Fragment() {
 
 
         binding.progressCircleMain.progress = 0 // 초단위
-        binding.progressCircleMain.max = 100
+        binding.progressCircleMain.max = 360000
 
         binding.startBtnMain.setOnClickListener{
             binding.startBtnMain.visibility = View.GONE
@@ -59,15 +65,18 @@ class HomeFragment : Fragment() {
 
     private fun startTimer(treeName:Int,treeNum:Int) { //treeName : 종류 , treeNum : 단계
         timerTask = timer(period = 10){
-            val treeName:Int = treeName
-            val treeNum:Int = treeNum
             time--
-            val sec = time/100
-            val milli = time%100
-            if(time == 0){
-                changeImage()
-            }
+            var sec = time/100
+            var min = time/6000
+            var hour = time/360000
+            var milli = time % 100
+            if (hour == 99) {time == 0}
+            if (min >= 60) { min -= 60*hour}
+            if (sec >= 60) { sec -= 60*min }
             requireActivity().runOnUiThread { //
+                binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
+                binding.timerMilli.text = "${milli}"
+                binding.progressCircleMain.progress = time1 - time
 
             }
 
@@ -79,7 +88,17 @@ class HomeFragment : Fragment() {
         timerTask?.cancel()
     }
 
-    private fun changeImage(){
+    private fun treeNu(){
+        treeN++
+        if (treeN == 5) {treeN -= 5}
+        val trImg = view?.findViewById<ImageView>(R.id.progress_Image)
+        when (treeN){
+            1 -> trImg?.setImageResource(R.drawable.profile1) // 나무로 교체
+            2 -> trImg?.setImageResource(R.drawable.profile2)
+            3 -> trImg?.setImageResource(R.drawable.profile3)
+            4 -> trImg?.setImageResource(R.drawable.profile4)
+        }
+
 
     }
 
