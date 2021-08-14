@@ -22,10 +22,8 @@ class HomeFragment : Fragment() {
     private var time = 360000
     private var time1:Int = time
     private var timerTask : Timer? = null
-    private var treeN = 0
-    private var time_dou:Double = 0.0
-    private var time1_dou:Double = 0.0
-    private var t_dou:Double = 0.0
+    private var tree_kind:Int = 0
+    private var tree_level:Int = 0
     private lateinit var firebaseDb:FirebaseDatabase
     private lateinit var auth:FirebaseAuth
     private lateinit var binding:FragmentHomeBinding
@@ -37,12 +35,13 @@ class HomeFragment : Fragment() {
         firebaseDb = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
         val uid:String = auth.uid.toString()
-        
+
         firebaseDb.reference.child("User").child(uid).child("name").get()
             .addOnSuccessListener { Log.d(TAG, "onCreateView: ${it.value}")
-                binding.textUserTreeMain.text = "${it.value.toString()}의\n나무 키우기"// 사랑합니다
+                binding.textUserTreeMain.text = "${it.value.toString()}의\n나무 키우기"
             }
 
+        treeNu(tree_kind,tree_level)
 
         binding.progressCircleMain.progress = 0 // 초단위
         binding.progressCircleMain.max = 360000
@@ -64,16 +63,30 @@ class HomeFragment : Fragment() {
 
 
     private fun startTimer(treeName:Int,treeNum:Int) { //treeName : 종류 , treeNum : 단계
-        timerTask = timer(period = 10){
+        timerTask = timer(period = 1){
             time--
             var sec = time/100
             var min = time/6000
             var hour = time/360000
             var milli = time % 100
+
             if (hour == 99) {time == 0}
             if (min >= 60) { min -= 60*hour}
             if (sec >= 60) { sec -= 60*min }
-            requireActivity().runOnUiThread { //
+            if (time == 0) {
+                tree_level++
+                if (tree_level == 5){
+                    tree_level = 0
+                    tree_kind++
+                }
+                if (tree_kind == 5){
+                    tree_kind = 0 // 첫번째 나무로 돌아오기
+                }
+                tree_time(tree_level)
+                treeNu(tree_kind,tree_level)
+                Log.d(TAG, "time = ${time} ${sec}이다")
+            }
+            requireActivity().runOnUiThread {
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
                 binding.timerMilli.text = "${milli}"
                 binding.progressCircleMain.progress = time1 - time
@@ -88,15 +101,61 @@ class HomeFragment : Fragment() {
         timerTask?.cancel()
     }
 
-    private fun treeNu(){
-        treeN++
-        if (treeN == 5) {treeN -= 5}
-        val trImg = view?.findViewById<ImageView>(R.id.progress_Image)
-        when (treeN){
-            1 -> trImg?.setImageResource(R.drawable.profile1) // 나무로 교체
-            2 -> trImg?.setImageResource(R.drawable.profile2)
-            3 -> trImg?.setImageResource(R.drawable.profile3)
-            4 -> trImg?.setImageResource(R.drawable.profile4)
+    private fun tree_time(trLevel: Int){
+        when (tree_level){
+            0 -> {time = 360000
+            time1 = 360000}
+            1 -> {time = 1080000
+            time1 = 1080000}
+            2 -> {time = 1800000
+            time1 = 1800000}
+            3 -> {time = 2520000
+            time1 = 2520000}
+        }
+    }
+
+    private fun treeNu(tr_kind:Int,tr_level:Int){
+
+        val trKind = tr_kind
+        val trLevel = tr_level
+        val trImg = binding.progressImage
+
+        when (trKind){
+            0 -> when(trLevel) {
+                0 -> trImg.setImageResource(R.drawable.profile1)
+                1 -> trImg.setImageResource(R.drawable.profile2)
+                2 -> trImg.setImageResource(R.drawable.profile3)
+                3 -> trImg.setImageResource(R.drawable.profile4)
+                4 -> trImg.setImageResource(R.drawable.profile5)
+            }
+            1 -> when(trLevel) {
+                0 -> trImg.setImageResource(R.drawable.profile1)
+                1 -> trImg.setImageResource(R.drawable.profile2)
+                2 -> trImg.setImageResource(R.drawable.profile3)
+                3 -> trImg.setImageResource(R.drawable.profile4)
+                4 -> trImg.setImageResource(R.drawable.profile5)
+            }
+            2 -> when(trLevel) {
+                0 -> trImg.setImageResource(R.drawable.profile1)
+                1 -> trImg.setImageResource(R.drawable.profile2)
+                2 -> trImg.setImageResource(R.drawable.profile3)
+                3 -> trImg.setImageResource(R.drawable.profile4)
+                4 -> trImg.setImageResource(R.drawable.profile5)
+            }
+            3 -> when(trLevel) {
+                0 -> trImg.setImageResource(R.drawable.profile1)
+                1 -> trImg.setImageResource(R.drawable.profile2)
+                2 -> trImg.setImageResource(R.drawable.profile3)
+                3 -> trImg.setImageResource(R.drawable.profile4)
+                4 -> trImg.setImageResource(R.drawable.profile5)
+            }
+            4 -> when(trLevel) {
+                0 -> trImg.setImageResource(R.drawable.profile1)
+                1 -> trImg.setImageResource(R.drawable.profile2)
+                2 -> trImg.setImageResource(R.drawable.profile3)
+                3 -> trImg.setImageResource(R.drawable.profile4)
+                4 -> trImg.setImageResource(R.drawable.profile5)
+            }
         }
 
 
