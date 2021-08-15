@@ -131,6 +131,11 @@ public class JoinActivity extends AppCompatActivity {
                 String name = binding.etName.getText().toString();
                 String email = binding.etUserEmail.getText().toString();
                 String pwd = binding.etUserPwd.getText().toString();
+                int time = 360000;
+                int treeLevel = 0;
+                int treeKind = 0;
+                int studyTime = 0;
+                int count = 0;
 
                 mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(JoinActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -138,7 +143,7 @@ public class JoinActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String Uid = user.getUid();
-                            UserAccount account = new UserAccount(name, email, Uid, profile);
+                            UserAccount account = new UserAccount(name, email, Uid, profile, time, treeLevel, treeKind, studyTime, count);
                             databaseReference.child("User").child(Uid).setValue(account);
                             progressDialog.dismiss();
                             Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
