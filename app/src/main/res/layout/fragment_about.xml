@@ -13,6 +13,7 @@
        android:layout_height="80dp"
        android:text="도감"
        android:textSize="30dp"
+       android:textColor="#369657"
        android:gravity="center"
        android:fontFamily="@font/app_main_font"
        android:background="@drawable/line"/>
