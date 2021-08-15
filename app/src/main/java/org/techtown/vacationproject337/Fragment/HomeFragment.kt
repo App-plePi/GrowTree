@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var firebaseDb:FirebaseDatabase
     private lateinit var auth:FirebaseAuth
     private lateinit var binding:FragmentHomeBinding
+    private var cheak:Boolean = false
 
 
 
@@ -108,6 +109,13 @@ class HomeFragment : Fragment() {
             binding.endBtnMain.visibility = View.GONE
             stopTimer()
         }
+        binding.startBtnMainSub.setOnClickListener {
+            binding.endBtnMain.visibility = View.VISIBLE
+            binding.startBtnMainSub.visibility = View.GONE
+            treeNu(tree_kind, tree_level)
+            tree_time()
+            startTimer()
+        }
 
         return v
     }
@@ -145,26 +153,17 @@ class HomeFragment : Fragment() {
             if (min >= 60) { min -= 60*hour}
             if (hour == 99) {time == 0}
             if (time == 0) {
+
                 tree_level++
 
-
                 if (tree_level == 4){
+                    cheak = true
+                    treeNu(tree_kind,tree_level)
+                    tree_level = 0
+                    count++
                     stopTimer()
-                    treeNu(tree_kind,tree_level)
-                    val builder = AlertDialog.Builder(requireActivity())
-                    builder.setTitle("제목")
-                    builder.setMessage("나무에 꽃이 피었습니다\n 다음 나무를 키우고 싶으시다면 '확인'버튼을 누르고 타이머를 실행시켜주세요")
-                    builder.setPositiveButton(
-                        "확인"
-                    ) { dialog, which ->
-                        tree_level = 0
-                        tree_kind++
-                        count++
-                    }
-                    builder.show()
-
-                }else{
-                    treeNu(tree_kind,tree_level)
+                }else {
+                    treeNu(tree_kind, tree_level)
                     tree_time()
                 }
                 if (tree_kind == 5){
@@ -175,6 +174,18 @@ class HomeFragment : Fragment() {
             requireActivity().runOnUiThread {
 
 
+                if (cheak == true){
+                    val builder = AlertDialog.Builder(requireActivity())
+                    builder.setTitle("나무에 꽃이 피었습니다!")
+                    builder.setMessage("16시간동안 나무를 키운 당신! 대단합니다!\n다음 나무를 키우고 싶으시면 'start'버튼을 눌러주세요")
+                    builder.setPositiveButton(
+                        "확인"
+                    ) { dialog, which -> cheak = false}
+                    builder.show()
+                    binding.startBtnMain.visibility = View.GONE
+                    binding.endBtnMain.visibility = View.GONE
+                    binding.startBtnMainSub.visibility = View.VISIBLE
+                }
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
                 //Log.d(TAG, "${min}:min ${sec}:sec 민")
                 binding.timerMilli.text = "${milli}"
@@ -185,6 +196,16 @@ class HomeFragment : Fragment() {
 
         }
 
+    }
+
+    private fun popM(){
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle("나무에 꽃이 피었습니다!")
+        builder.setMessage("16시간동안 나무를 키운 당신! 대단합니다!\n다음 나무를 키우고 싶으시면 'start'버튼을 눌러주세요")
+        builder.setPositiveButton(
+            "확인"
+        ) { dialog, which -> }
+        builder.show()
     }
 
     private fun stopTimer(){
