@@ -88,9 +88,18 @@ class HomeFragment : Fragment() {
                 //Log.d(TAG, "onCreateView: ${tree_level} level  ${binding.progressCircleMain.max} max")
                 treeNu(tree_kind,tree_level)
                 tree_progess()
-                binding.progressCircleMain.progress = (time1 - time)/100
+                var sec = time/100 // 초
+                var min = time/6000 // 분
+                var hour = time/360000 // 시간
+                var milli = time % 100 // 밀리초
+                if (sec >= 60) { sec -= 60*min }
+                if (min >= 60) { min -= 60*hour}
+                if (hour == 99) {time == 0}
+                binding.progressCircleMain.progress = time1 - time
+                binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
+                binding.timerMilli.text = "%02d".format(milli)
 
-                //Log.d(TAG, "${binding.progressCircleMain.max} max2")
+                Log.d(TAG, "${binding.progressCircleMain.progress} progess ${binding.progressCircleMain.max}max")
 
             }.addOnFailureListener { Toast.makeText(requireActivity(),"문제",Toast.LENGTH_SHORT).show() }
 
