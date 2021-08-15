@@ -35,7 +35,6 @@ class HomeFragment : Fragment() {
     private lateinit var firebaseDb:FirebaseDatabase
     private lateinit var auth:FirebaseAuth
     private lateinit var binding:FragmentHomeBinding
-    private lateinit var binding1:ActivityMain2Binding
 
 
 
@@ -62,14 +61,14 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener {
                 val a = "${it.value.toString()}"
                 tree_kind = a.toInt()
-                Log.d(TAG, "onCreateView: ${tree_kind} kink")
+                //Log.d(TAG, "onCreateView: ${tree_kind} kink")
             }
         firebaseDb.reference.child("User").child(uid).child("studyTime").get()
             .addOnSuccessListener {
                 var a = "${it.value.toString()}"
                 studyTime = a.toInt()
-                Log.d(TAG, "onCreateView: ${studyTime} st타임1")
-                Log.d(TAG, "onCreateView: ${studyTime} st타임2")
+                //Log.d(TAG, "onCreateView: ${studyTime} st타임1")
+                //Log.d(TAG, "onCreateView: ${studyTime} st타임2")
             }
         firebaseDb.reference.child("User").child(uid).child("count").get()
             .addOnSuccessListener {
@@ -80,16 +79,16 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener {
                 var a = "${it.value.toString()}"
                 time = a.toInt()
-                Log.d(TAG, "onCreateView: ${time} 타임")
+                //Log.d(TAG, "onCreateView: ${time} 타임")
             }
         firebaseDb.reference.child("User").child(uid).child("treeLevel").get()
             .addOnSuccessListener {
                 val a = "${it.value.toString()}"
                 tree_level = a.toInt()
-                Log.d(TAG, "onCreateView: ${tree_level} level  ${binding.progressCircleMain.max} max")
+                //Log.d(TAG, "onCreateView: ${tree_level} level  ${binding.progressCircleMain.max} max")
                 treeNu(tree_kind,tree_level)
                 tree_progess()
-                Log.d(TAG, "${binding.progressCircleMain.max} max2")
+                //Log.d(TAG, "${binding.progressCircleMain.max} max2")
 
             }.addOnFailureListener { Toast.makeText(requireActivity(),"문제",Toast.LENGTH_SHORT).show() }
 
@@ -177,10 +176,10 @@ class HomeFragment : Fragment() {
 
 
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
-                Log.d(TAG, "${min}:min ${sec}:sec 민")
+                //Log.d(TAG, "${min}:min ${sec}:sec 민")
                 binding.timerMilli.text = "${milli}"
                 binding.progressCircleMain.progress = time1 - time
-                Log.d(TAG, "startTimer: ${time1-time} t1 -t ")
+               // Log.d(TAG, "startTimer: ${time1-time} t1 -t ")
 
             }
 
