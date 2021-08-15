@@ -5,7 +5,6 @@
     android:layout_height="wrap_content">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/tree_img_ly"
-            android:background="@drawable/man"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:layout_constraintTop_toTopOf="parent"

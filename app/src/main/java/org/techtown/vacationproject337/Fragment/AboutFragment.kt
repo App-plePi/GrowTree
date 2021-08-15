@@ -25,11 +25,11 @@ class AboutFragment : Fragment() {
         //val v: View = binding.getRoot()
 
         val treelist = arrayListOf(
-            Tree("treename1",R.drawable.man), //이미지 추가
-            Tree("treename2",R.drawable.man),
-            Tree("treename3",R.drawable.man),
-            Tree("treename4",R.drawable.man),
-            Tree("treename5",R.drawable.man)
+            Tree("참나무",R.drawable.ic_tree_cha), //이미지 추가
+            Tree("복숭아나무",R.drawable.ic_tree_peach),
+            Tree("조팝나무",R.drawable.ic_tree_meadow),
+            Tree("떡갈나무",R.drawable.ic_tree_oak),
+            Tree("벚나무",R.drawable.ic_tree_cherryblossom)
         )
 
         //val linearLayoutManager by lazy { LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false) }

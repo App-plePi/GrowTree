@@ -51,8 +51,7 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener { Log.d(TAG, "onCreateView: ${it.value}")
                 binding.textUserTreeMain.text = "${it.value.toString()}의\n나무 키우기"
             }
-
-        binding.progressCircleMain.progress = 0 // 시작 원형프그바 = 0
+        // 시작 원형프그바 = 0
         //binding.progressCircleMain.max = 360000
 
 
@@ -89,6 +88,8 @@ class HomeFragment : Fragment() {
                 //Log.d(TAG, "onCreateView: ${tree_level} level  ${binding.progressCircleMain.max} max")
                 treeNu(tree_kind,tree_level)
                 tree_progess()
+                binding.progressCircleMain.progress = (time1 - time)/100
+
                 //Log.d(TAG, "${binding.progressCircleMain.max} max2")
 
             }.addOnFailureListener { Toast.makeText(requireActivity(),"문제",Toast.LENGTH_SHORT).show() }
@@ -97,7 +98,9 @@ class HomeFragment : Fragment() {
         Toast.makeText(requireActivity(),"타이머를 작동시켜주세요",Toast.LENGTH_SHORT).show()
 
 
-        treeNu(tree_kind,tree_level) // 이미지 세팅 초기,
+        //treeNu(tree_kind,tree_level) // 이미지 세팅 초기,
+        //tree_progess()
+        //binding.progressCircleMain.progress = (time1 - time)/100
 
         binding.startBtnMain.setOnClickListener{
             binding.startBtnMain.visibility = View.GONE
@@ -249,39 +252,39 @@ class HomeFragment : Fragment() {
 
         when (trKind){
             0 -> when(trLevel) {
-                0 -> trImg.setImageResource(R.drawable.profile1)
-                1 -> trImg.setImageResource(R.drawable.profile2)
-                2 -> trImg.setImageResource(R.drawable.profile3)
-                3 -> trImg.setImageResource(R.drawable.profile4)
-                4 -> trImg.setImageResource(R.drawable.profile5)
+                0 -> trImg.setImageResource(R.drawable.ic_levelone)
+                1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
+                2 -> trImg.setImageResource(R.drawable.ic_levelthree)
+                3 -> trImg.setImageResource(R.drawable.ic_levelfour)
+                4 -> trImg.setImageResource(R.drawable.ic_tree_meadow)
             }
             1 -> when(trLevel) {
-                0 -> trImg.setImageResource(R.drawable.profile1)
-                1 -> trImg.setImageResource(R.drawable.profile2)
-                2 -> trImg.setImageResource(R.drawable.profile3)
-                3 -> trImg.setImageResource(R.drawable.profile4)
-                4 -> trImg.setImageResource(R.drawable.profile5)
+                0 -> trImg.setImageResource(R.drawable.ic_levelone)
+                1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
+                2 -> trImg.setImageResource(R.drawable.ic_levelthree)
+                3 -> trImg.setImageResource(R.drawable.ic_levelfour)
+                4 -> trImg.setImageResource(R.drawable.ic_tree_peach)
             }
             2 -> when(trLevel) {
-                0 -> trImg.setImageResource(R.drawable.profile1)
-                1 -> trImg.setImageResource(R.drawable.profile2)
-                2 -> trImg.setImageResource(R.drawable.profile3)
-                3 -> trImg.setImageResource(R.drawable.profile4)
-                4 -> trImg.setImageResource(R.drawable.profile5)
+                0 -> trImg.setImageResource(R.drawable.ic_levelone)
+                1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
+                2 -> trImg.setImageResource(R.drawable.ic_levelthree)
+                3 -> trImg.setImageResource(R.drawable.ic_levelfour)
+                4 -> trImg.setImageResource(R.drawable.ic_tree_cha)
             }
             3 -> when(trLevel) {
-                0 -> trImg.setImageResource(R.drawable.profile1)
-                1 -> trImg.setImageResource(R.drawable.profile2)
-                2 -> trImg.setImageResource(R.drawable.profile3)
-                3 -> trImg.setImageResource(R.drawable.profile4)
-                4 -> trImg.setImageResource(R.drawable.profile5)
+                0 -> trImg.setImageResource(R.drawable.ic_levelone)
+                1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
+                2 -> trImg.setImageResource(R.drawable.ic_levelthree)
+                3 -> trImg.setImageResource(R.drawable.ic_levelfour)
+                4 -> trImg.setImageResource(R.drawable.ic_tree_oak)
             }
             4 -> when(trLevel) {
-                0 -> trImg.setImageResource(R.drawable.profile1)
-                1 -> trImg.setImageResource(R.drawable.profile2)
-                2 -> trImg.setImageResource(R.drawable.profile3)
-                3 -> trImg.setImageResource(R.drawable.profile4)
-                4 -> trImg.setImageResource(R.drawable.profile5)
+                0 -> trImg.setImageResource(R.drawable.ic_levelone)
+                1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
+                2 -> trImg.setImageResource(R.drawable.ic_levelthree)
+                3 -> trImg.setImageResource(R.drawable.ic_levelfour)
+                4 -> trImg.setImageResource(R.drawable.ic_tree_cherryblossom)
             }
         }
 
