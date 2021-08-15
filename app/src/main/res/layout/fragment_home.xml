@@ -32,17 +32,17 @@
         app:layout_constraintTop_toBottomOf="@+id/text_userTree_main"
         app:layout_constraintBottom_toTopOf="@id/timer_main"
         android:layout_marginTop="40dp">
+
         <com.dinuscxj.progressbar.CircleProgressBar
             android:id="@+id/progress_circle_main"
-            android:layout_width="300dp"
+            android:layout_width="294dp"
             android:layout_height="300dp"
-            app:progress_text_size="50dp"
-            app:progress_text_color="#8BC34A"
-            app:style="solid_line"
-            app:progress_stroke_width="20dp"
-            app:progress_stroke_cap="round"
+            app:progress_text_size="0dp"
+            app:progress_end_color="#A0E353"
             app:progress_start_color="#4CAF50"
-            app:progress_end_color="#A0E353" />
+            app:progress_stroke_cap="round"
+            app:progress_stroke_width="20dp"
+            app:style="solid_line" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/progress_Image"

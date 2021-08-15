@@ -1,23 +1,15 @@
 package org.techtown.vacationproject337.Fragment
 
 import android.app.AlertDialog
-import android.content.ClipData
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import org.techtown.vacationproject337.Dbuser
 import org.techtown.vacationproject337.R
-import org.techtown.vacationproject337.databinding.ActivityMain2Binding
 import org.techtown.vacationproject337.databinding.FragmentHomeBinding
 import java.util.*
 import kotlin.concurrent.timer
@@ -38,7 +30,6 @@ class HomeFragment : Fragment() {
     private var cheak:Boolean = false
 
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentHomeBinding.inflate(inflater,container,false)
@@ -48,27 +39,19 @@ class HomeFragment : Fragment() {
         val uid:String = auth.uid.toString()
 
         firebaseDb.reference.child("User").child(uid).child("name").get()
-            .addOnSuccessListener { Log.d(TAG, "onCreateView: ${it.value}")
+            .addOnSuccessListener {
                 binding.textUserTreeMain.text = "${it.value.toString()}의\n나무 키우기"
             }
-        // 시작 원형프그바 = 0
-        //binding.progressCircleMain.max = 360000
-
-
-
 
         firebaseDb.reference.child("User").child(uid).child("treeKind").get()
             .addOnSuccessListener {
                 val a = "${it.value.toString()}"
                 tree_kind = a.toInt()
-                //Log.d(TAG, "onCreateView: ${tree_kind} kink")
             }
         firebaseDb.reference.child("User").child(uid).child("studyTime").get()
             .addOnSuccessListener {
                 var a = "${it.value.toString()}"
                 studyTime = a.toInt()
-                //Log.d(TAG, "onCreateView: ${studyTime} st타임1")
-                //Log.d(TAG, "onCreateView: ${studyTime} st타임2")
             }
         firebaseDb.reference.child("User").child(uid).child("count").get()
             .addOnSuccessListener {
@@ -79,13 +62,11 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener {
                 var a = "${it.value.toString()}"
                 time = a.toInt()
-                //Log.d(TAG, "onCreateView: ${time} 타임")
             }
         firebaseDb.reference.child("User").child(uid).child("treeLevel").get()
             .addOnSuccessListener {
                 val a = "${it.value.toString()}"
                 tree_level = a.toInt()
-                //Log.d(TAG, "onCreateView: ${tree_level} level  ${binding.progressCircleMain.max} max")
                 treeNu(tree_kind,tree_level)
                 tree_progess()
                 var sec = time/100 // 초
@@ -98,18 +79,7 @@ class HomeFragment : Fragment() {
                 binding.progressCircleMain.progress = time1 - time
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
                 binding.timerMilli.text = "%02d".format(milli)
-
-                Log.d(TAG, "${binding.progressCircleMain.progress} progess ${binding.progressCircleMain.max}max")
-
-            }.addOnFailureListener { Toast.makeText(requireActivity(),"문제",Toast.LENGTH_SHORT).show() }
-
-
-        Toast.makeText(requireActivity(),"타이머를 작동시켜주세요",Toast.LENGTH_SHORT).show()
-
-
-        //treeNu(tree_kind,tree_level) // 이미지 세팅 초기,
-        //tree_progess()
-        //binding.progressCircleMain.progress = (time1 - time)/100
+            }.addOnFailureListener { Toast.makeText(requireActivity(),"실행오류",Toast.LENGTH_SHORT).show() }
 
         binding.startBtnMain.setOnClickListener{
             binding.startBtnMain.visibility = View.GONE
@@ -139,21 +109,18 @@ class HomeFragment : Fragment() {
         val uid:String = auth.uid.toString()
         tree_min(tree_level)
         studyTime = ((time1 - time)/6000) + (960 * count + studymin)
-        firebaseDb.reference.child("User").child(uid).child("time").setValue(time)
-        firebaseDb.reference.child("User").child(uid).child("treeKind").setValue(tree_kind)
-        firebaseDb.reference.child("User").child(uid).child("treeLevel").setValue(tree_level)
-        firebaseDb.reference.child("User").child(uid).child("count").setValue(count)//만든 나무 수
-        firebaseDb.reference.child("User").child(uid).child("studyTime").setValue(studyTime)//공부한 시간
+        firebaseDb.reference.child("User").child(uid).child("time").setValue(time) // 플래그먼트 종료시 타이머 시간값
+        firebaseDb.reference.child("User").child(uid).child("treeKind").setValue(tree_kind) // 종료시 나무 종류
+        firebaseDb.reference.child("User").child(uid).child("treeLevel").setValue(tree_level) // 종료시 나무 단계
+        firebaseDb.reference.child("User").child(uid).child("count").setValue(count) // 나무 수
+        firebaseDb.reference.child("User").child(uid).child("studyTime").setValue(studyTime) // 공부시간
         stopTimer()
     }
 
-
-
-    private fun startTimer() { //treeName : 종류 , treeNum : 단계
+    private fun startTimer() {
 
         timerTask = timer(period = 1){
             time--
-
 
             var sec = time/100 // 초
             var min = time/6000 // 분
@@ -161,12 +128,12 @@ class HomeFragment : Fragment() {
             var milli = time % 100 // 밀리초
 
 
-            if (sec >= 60) { sec -= 60*min }
+            if (sec >= 60) { sec -= 60*min } // 십진수 = time 변수들 단위 맞추기
             if (min >= 60) { min -= 60*hour}
             if (hour == 99) {time == 0}
             if (time == 0) {
 
-                tree_level++
+                tree_level++ // 단계 증가
 
                 if (tree_level == 4){
                     cheak = true
@@ -185,7 +152,6 @@ class HomeFragment : Fragment() {
 
             requireActivity().runOnUiThread {
 
-
                 if (cheak == true){
                     val builder = AlertDialog.Builder(requireActivity())
                     builder.setTitle("나무에 꽃이 피었습니다!")
@@ -199,25 +165,13 @@ class HomeFragment : Fragment() {
                     binding.startBtnMainSub.visibility = View.VISIBLE
                 }
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
-                //Log.d(TAG, "${min}:min ${sec}:sec 민")
                 binding.timerMilli.text = "${milli}"
                 binding.progressCircleMain.progress = time1 - time
-               // Log.d(TAG, "startTimer: ${time1-time} t1 -t ")
 
             }
 
         }
 
-    }
-
-    private fun popM(){
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("나무에 꽃이 피었습니다!")
-        builder.setMessage("16시간동안 나무를 키운 당신! 대단합니다!\n다음 나무를 키우고 싶으시면 'start'버튼을 눌러주세요")
-        builder.setPositiveButton(
-            "확인"
-        ) { dialog, which -> }
-        builder.show()
     }
 
     private fun stopTimer(){
@@ -296,8 +250,6 @@ class HomeFragment : Fragment() {
                 4 -> trImg.setImageResource(R.drawable.ic_tree_cherryblossom)
             }
         }
-
-
     }
 
     private fun tree_min(trLev:Int){

@@ -23,8 +23,7 @@ class RecyclerAdapter(val treelist: ArrayList<Tree>) : RecyclerView.Adapter<Recy
 
     override fun onBindViewHolder(holder: RecyclerAdapter.CustomViewHolder, position: Int) {
         holder.tree_img1.setImageResource(treelist[position].tree_Image)
-        holder.tree_name1.text = treelist[position].tree_Name // 데이터 클래스
-        Log.d(TAG, "onBindViewHolder: ${treelist[position].tree_Image} 아잉 준상선배님만 믿습니다 아잉")
+        holder.tree_name1.text = treelist[position].tree_Name
     }
 
 
