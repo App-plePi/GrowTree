@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
 import org.techtown.vacationproject337.LoginActivity;
 import org.techtown.vacationproject337.R;
 import org.techtown.vacationproject337.SettingActivity;
@@ -43,6 +44,35 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View v = binding.getRoot();
+
+        FirebaseDatabase.getInstance().getReference().child("User").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserAccount account = snapshot.getValue(UserAccount.class);
+                String name = account.getName();
+                String email = account.getEmail();
+                int profile = account.getProfile();
+                int studyTime = account.getStudyTime();
+                int count = account.getCount();
+
+                binding.tvName.setText(name);
+                binding.tvEmail.setText(email);
+                switch (profile){
+                    case 1: binding.profile.setImageResource(R.drawable.profile1);break;
+                    case 2: binding.profile.setImageResource(R.drawable.profile2);break;
+                    case 3: binding.profile.setImageResource(R.drawable.profile3);break;
+                    case 4: binding.profile.setImageResource(R.drawable.profile4);break;
+                    case 5: binding.profile.setImageResource(R.drawable.profile5);break;
+                }
+                String totalH = String.valueOf(studyTime/60);
+                String totalM = String.valueOf(studyTime%60);
+                binding.totalTime.setText(totalH+" : "+totalM);
+                binding.totalPlant.setText(String.valueOf(count));
+            }
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+            }
+        });
 
         binding.btnLogout.setOnClickListener(v1 -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -73,46 +103,4 @@ public class ProfileFragment extends Fragment {
         autoLogin.commit();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        nameRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String name = snapshot.getValue(String.class);
-                binding.tvName.setText(name);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                binding.tvName.setText("불러오기 오류");
-            }
-        });
-        emailRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String email = snapshot.getValue(String.class);
-                binding.tvEmail.setText(email);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                binding.tvEmail.setText("불러오기 오류");
-            }
-        });
-        profileRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int profile = snapshot.getValue(int.class);
-                switch (profile){
-                    case 1: binding.profile.setImageResource(R.drawable.profile1);break;
-                    case 2: binding.profile.setImageResource(R.drawable.profile2);break;
-                    case 3: binding.profile.setImageResource(R.drawable.profile3);break;
-                    case 4: binding.profile.setImageResource(R.drawable.profile4);break;
-                    case 5: binding.profile.setImageResource(R.drawable.profile5);break;
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull  DatabaseError error) { }
-        });
-
-    }
 }
