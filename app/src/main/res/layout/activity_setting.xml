@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="🛠SETTING🛠"
+        android:fontFamily="@font/app_main_font"
         android:textSize="35dp"
         android:textColor="#369657"
         android:layout_marginTop="70dp"
@@ -35,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="프로필"
+        android:fontFamily="@font/app_main_font"
         android:textSize="18dp"
         android:textColor="#369657"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -131,6 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="닉네임"
+        android:fontFamily="@font/app_main_font"
         android:textSize="18dp"
         android:textColor="#369657"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -160,6 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이메일"
+        android:fontFamily="@font/app_main_font"
         android:textSize="18dp"
         android:textColor="#369657"
         android:layout_marginLeft="30dp"
@@ -184,6 +188,7 @@
         android:layout_height="wrap_content"
         android:background="#369657"
         android:text="수정"
+        android:fontFamily="@font/app_main_font"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_email"
         app:layout_constraintBottom_toTopOf="@id/withdrawal"
@@ -198,6 +203,7 @@
         app:layout_constraintTop_toBottomOf="@id/btn_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="회원탈퇴"
+        android:fontFamily="@font/app_main_font"
         android:textColor="#FF5252"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
