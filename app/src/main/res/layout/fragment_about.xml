@@ -24,7 +24,4 @@
        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
        tools:listitem="@layout/item_aboutrecycler"
        app:spanCount="2"/>
-
-
-
 </LinearLayout>

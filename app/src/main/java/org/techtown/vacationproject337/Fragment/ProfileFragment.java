@@ -64,9 +64,9 @@ public class ProfileFragment extends Fragment {
                     case 4: binding.profile.setImageResource(R.drawable.profile4);break;
                     case 5: binding.profile.setImageResource(R.drawable.profile5);break;
                 }
-                String totalH = String.valueOf(studyTime/60);
-                String totalM = String.valueOf(studyTime%60);
-                binding.totalTime.setText(totalH+" : "+totalM);
+                int totalH = studyTime/60;
+                int totalM = studyTime%60;
+                binding.totalTime.setText(String.format("%02d"+":"+"%02d", totalH, totalM));
                 binding.totalPlant.setText(String.valueOf(count));
             }
             @Override
