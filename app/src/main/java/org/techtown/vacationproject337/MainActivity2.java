@@ -30,9 +30,9 @@ public class MainActivity2 extends AppCompatActivity {
                     case R.id.menu_home:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_view,new HomeFragment()).commit();
                         break;
-                    case R.id.menu_about:
+                    case R.id.menu_about:{
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_view,new AboutFragment()).commit();
-                        break;
+                        break;}
                     case R.id.menu_profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_view,new ProfileFragment()).commit();
                         break;
