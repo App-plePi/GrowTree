@@ -82,18 +82,18 @@ class HomeFragment : Fragment() {
             }.addOnFailureListener { Toast.makeText(requireActivity(),"실행오류",Toast.LENGTH_SHORT).show() }
 
         binding.startBtnMain.setOnClickListener{
-            binding.startBtnMain.visibility = View.GONE
+            binding.startBtnMain.visibility = View.INVISIBLE
             binding.endBtnMain.visibility = View.VISIBLE
             startTimer()
         }
         binding.endBtnMain.setOnClickListener {
             binding.startBtnMain.visibility = View.VISIBLE
-            binding.endBtnMain.visibility = View.GONE
+            binding.endBtnMain.visibility = View.INVISIBLE
             stopTimer()
         }
         binding.startBtnMainSub.setOnClickListener {
             binding.endBtnMain.visibility = View.VISIBLE
-            binding.startBtnMainSub.visibility = View.GONE
+            binding.startBtnMainSub.visibility = View.INVISIBLE
             treeNu(tree_kind, tree_level)
             tree_time()
             startTimer()
@@ -136,11 +136,11 @@ class HomeFragment : Fragment() {
                 tree_level++ // 단계 증가
 
                 if (tree_level == 4){
-                    cheak = true
                     treeNu(tree_kind,tree_level)
                     tree_level = 0
                     count++
                     stopTimer()
+                    cheak = true
                 }else {
                     treeNu(tree_kind, tree_level)
                     tree_time()
@@ -158,10 +158,11 @@ class HomeFragment : Fragment() {
                     builder.setMessage("16시간동안 나무를 키운 당신! 대단합니다!\n다음 나무를 키우고 싶으시면 'start'버튼을 눌러주세요")
                     builder.setPositiveButton(
                         "확인"
-                    ) { dialog, which -> cheak = false}
+                    ) { dialog, which -> }
+                    cheak = false
                     builder.show()
-                    binding.startBtnMain.visibility = View.GONE
-                    binding.endBtnMain.visibility = View.GONE
+                    binding.startBtnMain.visibility = View.INVISIBLE
+                    binding.endBtnMain.visibility = View.INVISIBLE
                     binding.startBtnMainSub.visibility = View.VISIBLE
                 }
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
