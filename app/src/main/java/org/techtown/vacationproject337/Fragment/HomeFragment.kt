@@ -119,7 +119,7 @@ class HomeFragment : Fragment() {
 
     private fun startTimer() {
 
-        timerTask = timer(period = 1){
+        timerTask = timer(period = 10){
             time--
 
             var sec = time/100 // 초
