@@ -165,7 +165,7 @@ class HomeFragment : Fragment() {
                     binding.startBtnMainSub.visibility = View.VISIBLE
                 }
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
-                binding.timerMilli.text = "${milli}"
+                binding.timerMilli.text = "%02d".format(milli)
                 binding.progressCircleMain.progress = time1 - time
 
             }
