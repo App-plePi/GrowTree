@@ -19,10 +19,10 @@ class AboutFragment : Fragment() {
 
         val treelist = arrayListOf(
             Tree("참나무",R.drawable.ic_tree_cha), //이미지 추가
-            Tree("복숭아나무",R.drawable.ic_tree_peach),
+            Tree("벚나무",R.drawable.ic_tree_cherryblossom),
             Tree("조팝나무",R.drawable.ic_tree_meadow),
             Tree("떡갈나무",R.drawable.ic_tree_oak),
-            Tree("벚나무",R.drawable.ic_tree_cherryblossom)
+            Tree("복숭아나무",R.drawable.ic_tree_peach)
         )
 
         binding.recycler.adapter = RecyclerAdapter(treelist)

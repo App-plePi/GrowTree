@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.AboutFragment"
-    android:orientation="vertical"
     android:background="@drawable/background">
 
    <TextView
+       android:id="@+id/text_do"
        android:layout_width="match_parent"
        android:layout_height="80dp"
        android:text="도감"
@@ -16,7 +16,8 @@
        android:textColor="#369657"
        android:gravity="center"
        android:fontFamily="@font/app_main_font"
-       android:background="@drawable/line"/>
+       android:background="@drawable/line"
+       />
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recycler"
@@ -24,5 +25,6 @@
        android:layout_height="wrap_content"
        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
        tools:listitem="@layout/item_aboutrecycler"
-       app:spanCount="2"/>
-</LinearLayout>
+       app:spanCount="2"
+      android:layout_below="@+id/text_do"/>
+</RelativeLayout>

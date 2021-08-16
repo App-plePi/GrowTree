@@ -226,7 +226,7 @@ class HomeFragment : Fragment() {
                 1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
                 2 -> trImg.setImageResource(R.drawable.ic_levelthree)
                 3 -> trImg.setImageResource(R.drawable.ic_levelfour)
-                4 -> trImg.setImageResource(R.drawable.ic_tree_peach)
+                4 -> trImg.setImageResource(R.drawable.ic_tree_cherryblossom)
             }
             2 -> when(trLevel) {
                 0 -> trImg.setImageResource(R.drawable.ic_levelone)
@@ -247,7 +247,7 @@ class HomeFragment : Fragment() {
                 1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
                 2 -> trImg.setImageResource(R.drawable.ic_levelthree)
                 3 -> trImg.setImageResource(R.drawable.ic_levelfour)
-                4 -> trImg.setImageResource(R.drawable.ic_tree_cherryblossom)
+                4 -> trImg.setImageResource(R.drawable.ic_tree_peach)
             }
         }
     }
