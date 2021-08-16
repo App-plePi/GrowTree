@@ -62,6 +62,7 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener {
                 var a = "${it.value.toString()}"
                 time = a.toInt()
+
             }
         firebaseDb.reference.child("User").child(uid).child("treeLevel").get()
             .addOnSuccessListener {
@@ -79,7 +80,22 @@ class HomeFragment : Fragment() {
                 binding.progressCircleMain.progress = time1 - time
                 binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
                 binding.timerMilli.text = "%02d".format(milli)
+                if (time == 0){
+                    binding.startBtnMain.visibility = View.INVISIBLE
+                    binding.endBtnMain.visibility = View.INVISIBLE
+                    binding.startBtnMainSub.visibility = View.VISIBLE
+                    binding.progressCircleMain.max = 1
+                    binding.progressCircleMain.progress = 1
+                    when(tree_kind){
+                        0 -> binding.progressImage.setImageResource(R.drawable.ic_tree_peach)
+                        1 -> binding.progressImage.setImageResource(R.drawable.ic_tree_meadow)
+                        2 -> binding.progressImage.setImageResource(R.drawable.ic_tree_cherryblossom)
+                        3 -> binding.progressImage.setImageResource(R.drawable.ic_tree_cha)
+                        4 -> binding.progressImage.setImageResource(R.drawable.ic_tree_oak)
+                    }
+                }
             }.addOnFailureListener { Toast.makeText(requireActivity(),"실행오류",Toast.LENGTH_SHORT).show() }
+
 
         binding.startBtnMain.setOnClickListener{
             binding.startBtnMain.visibility = View.INVISIBLE
@@ -107,8 +123,13 @@ class HomeFragment : Fragment() {
         firebaseDb = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
         val uid:String = auth.uid.toString()
-        tree_min(tree_level)
-        studyTime = ((time1 - time)/6000) + (960 * count + studymin)
+        if (time == 0){
+            tree_min(tree_level)
+            studyTime = 960 * count + studymin
+        } else{
+            tree_min(tree_level)
+            studyTime = ((time1 - time)/6000) + (960 * count + studymin)
+        }
         firebaseDb.reference.child("User").child(uid).child("time").setValue(time) // 플래그먼트 종료시 타이머 시간값
         firebaseDb.reference.child("User").child(uid).child("treeKind").setValue(tree_kind) // 종료시 나무 종류
         firebaseDb.reference.child("User").child(uid).child("treeLevel").setValue(tree_level) // 종료시 나무 단계
@@ -138,6 +159,7 @@ class HomeFragment : Fragment() {
                 if (tree_level == 4){
                     treeNu(tree_kind,tree_level)
                     tree_level = 0
+                    tree_kind++
                     count++
                     stopTimer()
                     cheak = true
@@ -154,7 +176,7 @@ class HomeFragment : Fragment() {
 
                 if (cheak == true){
                     val builder = AlertDialog.Builder(requireActivity())
-                    builder.setTitle("나무에 꽃이 피었습니다!")
+                    builder.setTitle("나무 성장 완료!")
                     builder.setMessage("16시간동안 나무를 키운 당신! 대단합니다!\n다음 나무를 키우고 싶으시면 'start'버튼을 눌러주세요")
                     builder.setPositiveButton(
                         "확인"
@@ -258,9 +280,9 @@ class HomeFragment : Fragment() {
         when (trLev){
             0 -> {studymin = 0}
             1 -> {studymin = 60}
-            2 -> {studymin = 180}
-            3 -> {studymin = 300}
-            4 -> {studymin = 420}
+            2 -> {studymin = 240}
+            3 -> {studymin = 540}
+            4 -> {studymin = 960}
 
         }
     }
