@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,9 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.techtown.vacationproject337.activity.LoginActivity;
 import org.techtown.vacationproject337.databinding.ActivitySettingBinding;
-
-import java.util.regex.Pattern;
 
 
 public class SettingActivity extends AppCompatActivity {
@@ -50,7 +47,7 @@ public class SettingActivity extends AppCompatActivity {
         DatabaseReference databaseReference = database.getReference();
 
         binding.back.setOnClickListener(v -> {
-            Intent intent = new Intent(SettingActivity.this, MainActivity2.class);
+            Intent intent = new Intent(SettingActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
@@ -73,7 +70,7 @@ public class SettingActivity extends AppCompatActivity {
                 if(isName){String name = binding.etName.getText().toString();
                 nameRef.setValue(name);}
                 if(profile!=0) profileRef.setValue(profile);
-                Intent intent = new Intent(SettingActivity.this, MainActivity2.class);
+                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
                 startActivity(intent);
             }
             else Toast.makeText(getApplicationContext(), "변경할 내용이 없습니다.", Toast.LENGTH_SHORT).show();

@@ -1,25 +1,21 @@
-package org.techtown.vacationproject337;
+package org.techtown.vacationproject337.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
+import org.techtown.vacationproject337.MainActivity;
 import org.techtown.vacationproject337.databinding.ActivityLoginBinding;
 
 
@@ -67,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         if(loginEmail != null&&loginPwd!=null){
-            Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
@@ -86,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                 autoLogin.putString("inputPwd", pwd);
                                 autoLogin.commit();
 
-                                Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else

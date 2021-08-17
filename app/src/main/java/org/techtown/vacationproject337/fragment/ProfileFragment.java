@@ -1,4 +1,4 @@
-package org.techtown.vacationproject337.Fragment;
+package org.techtown.vacationproject337.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,8 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-import org.techtown.vacationproject337.LoginActivity;
+import org.techtown.vacationproject337.activity.LoginActivity;
 import org.techtown.vacationproject337.R;
 import org.techtown.vacationproject337.SettingActivity;
 import org.techtown.vacationproject337.UserAccount;

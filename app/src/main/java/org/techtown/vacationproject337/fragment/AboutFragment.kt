@@ -1,4 +1,4 @@
-package org.techtown.vacationproject337.Fragment
+package org.techtown.vacationproject337.fragment
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
