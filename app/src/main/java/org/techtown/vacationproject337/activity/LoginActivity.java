@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     boolean isEmail = false;
     boolean isPwd = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,38 +36,45 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.etEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
-                if(s!=null) isEmail = true;
+                if (s != null) isEmail = true;
                 else isEmail = false;
             }
         });
         binding.etPwd.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
-                if(s!=null) isPwd = true;
-                else  isPwd =true;
+                if (s != null) isPwd = true;
+                else isPwd = true;
             }
         });
 
         binding.btnJoin.setOnClickListener(v -> {
-                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
+            startActivity(intent);
         });
 
-        if(loginEmail != null&&loginPwd!=null){
+        if (loginEmail != null && loginPwd != null) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        }
-        else if(loginEmail == null&&loginPwd==null){
+        } else if (loginEmail == null && loginPwd == null) {
             binding.btnLogin.setOnClickListener(v -> {
                 if (isEmail && isPwd) {
                     String email = binding.etEmail.getText().toString();

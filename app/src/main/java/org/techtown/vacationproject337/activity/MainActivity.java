@@ -21,21 +21,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        mBottomNavigationView=findViewById(R.id.bottom_navigation);
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_view,new HomeFragment()).commit();
+        mBottomNavigationView = findViewById(R.id.bottom_navigation);
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_view, new HomeFragment()).commit();
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menu_home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_view,new HomeFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_view, new HomeFragment()).commit();
                         break;
-                    case R.id.menu_about:{
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_view,new AboutFragment()).commit();
-                        break;}
+                    case R.id.menu_about: {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_view, new AboutFragment()).commit();
+                        break;
+                    }
                     case R.id.menu_profile:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_view,new ProfileFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_view, new ProfileFragment()).commit();
                         break;
 
                 }

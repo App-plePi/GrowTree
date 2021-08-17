@@ -36,7 +36,7 @@ public class SettingActivity extends AppCompatActivity {
     DatabaseReference emailRef = databaseReference.child("User").child(uid).child("email");
     DatabaseReference profileRef = databaseReference.child("User").child(uid).child("profile");
     boolean isName = false;
-    int profile=0;
+    int profile = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,11 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (s != null) isName = true;
@@ -66,14 +68,16 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         binding.btnEdit.setOnClickListener(v -> {
-            if(isName||profile!=0){
-                if(isName){String name = binding.etName.getText().toString();
-                nameRef.setValue(name);}
-                if(profile!=0) profileRef.setValue(profile);
+            if (isName || profile != 0) {
+                if (isName) {
+                    String name = binding.etName.getText().toString();
+                    nameRef.setValue(name);
+                }
+                if (profile != 0) profileRef.setValue(profile);
                 Intent intent = new Intent(SettingActivity.this, MainActivity.class);
                 startActivity(intent);
-            }
-            else Toast.makeText(getApplicationContext(), "변경할 내용이 없습니다.", Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(getApplicationContext(), "변경할 내용이 없습니다.", Toast.LENGTH_SHORT).show();
         });
 
         binding.withdrawal.setOnClickListener(v -> {
@@ -114,13 +118,24 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
-    public void profile (View v){
-        switch (v.getId()){
-            case R.id.p1: profile=1;break;
-            case R.id.p2: profile=2;break;
-            case R.id.p3: profile=3;break;
-            case R.id.p4: profile=4;break;
-            case R.id.p5: profile=5;break;
+
+    public void profile(View v) {
+        switch (v.getId()) {
+            case R.id.p1:
+                profile = 1;
+                break;
+            case R.id.p2:
+                profile = 2;
+                break;
+            case R.id.p3:
+                profile = 3;
+                break;
+            case R.id.p4:
+                profile = 4;
+                break;
+            case R.id.p5:
+                profile = 5;
+                break;
 
 
         }

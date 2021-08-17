@@ -17,26 +17,30 @@ import kotlin.concurrent.timer
 class HomeFragment : Fragment() {
 
     private var time = 360000
-    private var time1:Int = time
-    private var timerTask : Timer? = null
-    private var tree_kind:Int = 0
-    private var tree_level:Int = 0
-    private var count:Int = 0
-    private var studyTime:Int = 0
-    private var studymin:Int = 0
-    private lateinit var firebaseDb:FirebaseDatabase
-    private lateinit var auth:FirebaseAuth
-    private lateinit var binding:FragmentHomeBinding
-    private var cheak:Boolean = false
+    private var time1: Int = time
+    private var timerTask: Timer? = null
+    private var tree_kind: Int = 0
+    private var tree_level: Int = 0
+    private var count: Int = 0
+    private var studyTime: Int = 0
+    private var studymin: Int = 0
+    private lateinit var firebaseDb: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
+    private lateinit var binding: FragmentHomeBinding
+    private var cheak: Boolean = false
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val v: View = binding.getRoot()
         firebaseDb = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-        val uid:String = auth.uid.toString()
+        val uid: String = auth.uid.toString()
 
         firebaseDb.reference.child("User").child(uid).child("name").get()
             .addOnSuccessListener {
@@ -68,25 +72,31 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener {
                 val a = "${it.value.toString()}"
                 tree_level = a.toInt()
-                treeNu(tree_kind,tree_level)
+                treeNu(tree_kind, tree_level)
                 tree_progess()
-                var sec = time/100 // 초
-                var min = time/6000 // 분
-                var hour = time/360000 // 시간
+                var sec = time / 100 // 초
+                var min = time / 6000 // 분
+                var hour = time / 360000 // 시간
                 var milli = time % 100 // 밀리초
-                if (sec >= 60) { sec -= 60*min }
-                if (min >= 60) { min -= 60*hour}
-                if (hour == 99) {time == 0}
+                if (sec >= 60) {
+                    sec -= 60 * min
+                }
+                if (min >= 60) {
+                    min -= 60 * hour
+                }
+                if (hour == 99) {
+                    time == 0
+                }
                 binding.progressCircleMain.progress = time1 - time
-                binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
+                binding.timerMain.text = "%02d : %02d : %02d".format(hour, min, sec)
                 binding.timerMilli.text = "%02d".format(milli)
-                if (time == 0){
+                if (time == 0) {
                     binding.startBtnMain.visibility = View.INVISIBLE
                     binding.endBtnMain.visibility = View.INVISIBLE
                     binding.startBtnMainSub.visibility = View.VISIBLE
                     binding.progressCircleMain.max = 1
                     binding.progressCircleMain.progress = 1
-                    when(tree_kind){
+                    when (tree_kind) {
                         0 -> binding.progressImage.setImageResource(R.drawable.ic_tree_peach)
                         1 -> binding.progressImage.setImageResource(R.drawable.ic_tree_meadow)
                         2 -> binding.progressImage.setImageResource(R.drawable.ic_tree_cherryblossom)
@@ -94,10 +104,12 @@ class HomeFragment : Fragment() {
                         4 -> binding.progressImage.setImageResource(R.drawable.ic_tree_oak)
                     }
                 }
-            }.addOnFailureListener { Toast.makeText(requireActivity(),"실행오류",Toast.LENGTH_SHORT).show() }
+            }.addOnFailureListener {
+                Toast.makeText(requireActivity(), "실행오류", Toast.LENGTH_SHORT).show()
+            }
 
 
-        binding.startBtnMain.setOnClickListener{
+        binding.startBtnMain.setOnClickListener {
             binding.startBtnMain.visibility = View.INVISIBLE
             binding.endBtnMain.visibility = View.VISIBLE
             startTimer()
@@ -122,17 +134,20 @@ class HomeFragment : Fragment() {
         super.onStop()
         firebaseDb = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-        val uid:String = auth.uid.toString()
-        if (time == 0){
+        val uid: String = auth.uid.toString()
+        if (time == 0) {
             tree_min(tree_level)
             studyTime = 960 * count + studymin
-        } else{
+        } else {
             tree_min(tree_level)
-            studyTime = ((time1 - time)/6000) + (960 * count + studymin)
+            studyTime = ((time1 - time) / 6000) + (960 * count + studymin)
         }
-        firebaseDb.reference.child("User").child(uid).child("time").setValue(time) // 플래그먼트 종료시 타이머 시간값
-        firebaseDb.reference.child("User").child(uid).child("treeKind").setValue(tree_kind) // 종료시 나무 종류
-        firebaseDb.reference.child("User").child(uid).child("treeLevel").setValue(tree_level) // 종료시 나무 단계
+        firebaseDb.reference.child("User").child(uid).child("time")
+            .setValue(time) // 플래그먼트 종료시 타이머 시간값
+        firebaseDb.reference.child("User").child(uid).child("treeKind")
+            .setValue(tree_kind) // 종료시 나무 종류
+        firebaseDb.reference.child("User").child(uid).child("treeLevel")
+            .setValue(tree_level) // 종료시 나무 단계
         firebaseDb.reference.child("User").child(uid).child("count").setValue(count) // 나무 수
         firebaseDb.reference.child("User").child(uid).child("studyTime").setValue(studyTime) // 공부시간
         stopTimer()
@@ -140,41 +155,47 @@ class HomeFragment : Fragment() {
 
     private fun startTimer() {
 
-        timerTask = timer(period = 10){
+        timerTask = timer(period = 10) {
             time--
 
-            var sec = time/100 // 초
-            var min = time/6000 // 분
-            var hour = time/360000 // 시간
+            var sec = time / 100 // 초
+            var min = time / 6000 // 분
+            var hour = time / 360000 // 시간
             var milli = time % 100 // 밀리초
 
 
-            if (sec >= 60) { sec -= 60*min } // 십진수 = time 변수들 단위 맞추기
-            if (min >= 60) { min -= 60*hour}
-            if (hour == 99) {time == 0}
+            if (sec >= 60) {
+                sec -= 60 * min
+            } // 십진수 = time 변수들 단위 맞추기
+            if (min >= 60) {
+                min -= 60 * hour
+            }
+            if (hour == 99) {
+                time == 0
+            }
             if (time == 0) {
 
                 tree_level++ // 단계 증가
 
-                if (tree_level == 4){
-                    treeNu(tree_kind,tree_level)
+                if (tree_level == 4) {
+                    treeNu(tree_kind, tree_level)
                     tree_level = 0
                     tree_kind++
                     count++
                     stopTimer()
                     cheak = true
-                }else {
+                } else {
                     treeNu(tree_kind, tree_level)
                     tree_time()
                 }
-                if (tree_kind == 5){
+                if (tree_kind == 5) {
                     tree_kind = 0 // 첫번째 나무로 돌아오기
                 }
             }
 
             requireActivity().runOnUiThread {
 
-                if (cheak == true){
+                if (cheak == true) {
                     val builder = AlertDialog.Builder(requireActivity())
                     builder.setTitle("나무 성장 완료!")
                     builder.setMessage("16시간동안 나무를 키운 당신! 대단합니다!\n다음 나무를 키우고 싶으시면 'start'버튼을 눌러주세요")
@@ -187,7 +208,7 @@ class HomeFragment : Fragment() {
                     binding.endBtnMain.visibility = View.INVISIBLE
                     binding.startBtnMainSub.visibility = View.VISIBLE
                 }
-                binding.timerMain.text = "%02d : %02d : %02d".format(hour,min,sec)
+                binding.timerMain.text = "%02d : %02d : %02d".format(hour, min, sec)
                 binding.timerMilli.text = "%02d".format(milli)
                 binding.progressCircleMain.progress = time1 - time
 
@@ -197,75 +218,85 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun stopTimer(){
+    private fun stopTimer() {
         timerTask?.cancel()
     }
 
-    private fun tree_time(){
+    private fun tree_time() {
 
         val zer = 360000
         val one = 1080000
         val two = 1800000
         val thr = 2520000
 
-        when (tree_level){
-            0 -> {time = zer
-            time1 = zer
-            binding.progressCircleMain.max = zer
-            studyTime += thr/6000}
-            1 -> {time = one
-            time1 = one
-            binding.progressCircleMain.max = one
-            studyTime += zer/6000}
-            2 -> {time = two
-            time1 = two
-            binding.progressCircleMain.max = two
-            studyTime += one/6000}
-            3 -> {time = thr
-            time1 =thr
-            binding.progressCircleMain.max = thr
-            studyTime += two/6000}
-            4 -> {stopTimer()
-            tree_level = 0}
+        when (tree_level) {
+            0 -> {
+                time = zer
+                time1 = zer
+                binding.progressCircleMain.max = zer
+                studyTime += thr / 6000
+            }
+            1 -> {
+                time = one
+                time1 = one
+                binding.progressCircleMain.max = one
+                studyTime += zer / 6000
+            }
+            2 -> {
+                time = two
+                time1 = two
+                binding.progressCircleMain.max = two
+                studyTime += one / 6000
+            }
+            3 -> {
+                time = thr
+                time1 = thr
+                binding.progressCircleMain.max = thr
+                studyTime += two / 6000
+            }
+            4 -> {
+                stopTimer()
+                tree_level = 0
+            }
         }
     }
 
-    private fun treeNu(tr_kind:Int,tr_level:Int){
+    private fun treeNu(tr_kind: Int, tr_level: Int) {
 
         val trKind = tr_kind
         val trLevel = tr_level
         val trImg = binding.progressImage
 
-        when (trKind){
-            0 -> when(trLevel) {
+        when (trKind) {
+            0 -> when (trLevel) {
                 0 -> trImg.setImageResource(R.drawable.ic_levelone)
                 1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
                 2 -> trImg.setImageResource(R.drawable.ic_levelthree)
                 3 -> trImg.setImageResource(R.drawable.ic_levelfour)
                 4 -> trImg.setImageResource(R.drawable.ic_tree_meadow)
             }
-            1 -> when(trLevel) {
+            1 -> when (trLevel) {
                 0 -> trImg.setImageResource(R.drawable.ic_levelone)
                 1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
                 2 -> trImg.setImageResource(R.drawable.ic_levelthree)
                 3 -> trImg.setImageResource(R.drawable.ic_levelfour)
                 4 -> trImg.setImageResource(R.drawable.ic_tree_cherryblossom)
             }
-            2 -> when(trLevel) {
+            2 -> when (trLevel) {
                 0 -> trImg.setImageResource(R.drawable.ic_levelone)
                 1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
                 2 -> trImg.setImageResource(R.drawable.ic_levelthree)
                 3 -> trImg.setImageResource(R.drawable.ic_levelfour)
                 4 -> trImg.setImageResource(R.drawable.ic_tree_cha)
             }
-            3 -> when(trLevel) {
+            3 -> when (trLevel) {
                 0 -> trImg.setImageResource(R.drawable.ic_levelone)
                 1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
                 2 -> trImg.setImageResource(R.drawable.ic_levelthree)
                 3 -> trImg.setImageResource(R.drawable.ic_levelfour)
                 4 -> trImg.setImageResource(R.drawable.ic_tree_oak)
             }
-            4 -> when(trLevel) {
+            4 -> when (trLevel) {
                 0 -> trImg.setImageResource(R.drawable.ic_levelone)
                 1 -> trImg.setImageResource(R.drawable.ic_leveltwo)
                 2 -> trImg.setImageResource(R.drawable.ic_levelthree)
@@ -275,28 +306,46 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun tree_min(trLev:Int){
+    private fun tree_min(trLev: Int) {
         val trLev = trLev
-        when (trLev){
-            0 -> {studymin = 0}
-            1 -> {studymin = 60}
-            2 -> {studymin = 240}
-            3 -> {studymin = 540}
-            4 -> {studymin = 960}
+        when (trLev) {
+            0 -> {
+                studymin = 0
+            }
+            1 -> {
+                studymin = 60
+            }
+            2 -> {
+                studymin = 240
+            }
+            3 -> {
+                studymin = 540
+            }
+            4 -> {
+                studymin = 960
+            }
 
         }
     }
 
-    private fun tree_progess(){
-        when (tree_level){
-            0 -> {binding.progressCircleMain.max = 360000
-            time1 = 360000}
-            1 -> {binding.progressCircleMain.max = 1080000
-            time1 = 1080000}
-            2 -> {binding.progressCircleMain.max = 1800000
-            time1 = 1800000}
-            3 -> {binding.progressCircleMain.max = 2520000
-            time1 = 2520000}
+    private fun tree_progess() {
+        when (tree_level) {
+            0 -> {
+                binding.progressCircleMain.max = 360000
+                time1 = 360000
+            }
+            1 -> {
+                binding.progressCircleMain.max = 1080000
+                time1 = 1080000
+            }
+            2 -> {
+                binding.progressCircleMain.max = 1800000
+                time1 = 1800000
+            }
+            3 -> {
+                binding.progressCircleMain.max = 2520000
+                time1 = 2520000
+            }
         }
 
     }

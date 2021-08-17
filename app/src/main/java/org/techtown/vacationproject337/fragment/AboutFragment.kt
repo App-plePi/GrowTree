@@ -13,16 +13,20 @@ import org.techtown.vacationproject337.Tree
 import org.techtown.vacationproject337.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        val binding = FragmentAboutBinding.inflate(inflater,container,false)
+        val binding = FragmentAboutBinding.inflate(inflater, container, false)
 
         val treelist = arrayListOf(
-            Tree("참나무",R.drawable.ic_tree_cha), //이미지 추가
-            Tree("벚나무",R.drawable.ic_tree_cherryblossom),
-            Tree("조팝나무",R.drawable.ic_tree_meadow),
-            Tree("떡갈나무",R.drawable.ic_tree_oak),
-            Tree("복숭아나무",R.drawable.ic_tree_peach)
+            Tree("참나무", R.drawable.ic_tree_cha), //이미지 추가
+            Tree("벚나무", R.drawable.ic_tree_cherryblossom),
+            Tree("조팝나무", R.drawable.ic_tree_meadow),
+            Tree("떡갈나무", R.drawable.ic_tree_oak),
+            Tree("복숭아나무", R.drawable.ic_tree_peach)
         )
 
         binding.recycler.adapter = RecyclerAdapter(treelist)

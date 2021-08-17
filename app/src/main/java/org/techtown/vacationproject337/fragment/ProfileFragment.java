@@ -56,20 +56,31 @@ public class ProfileFragment extends Fragment {
 
                 binding.tvName.setText(name);
                 binding.tvEmail.setText(email);
-                switch (profile){
-                    case 1: binding.profile.setImageResource(R.drawable.profile1);break;
-                    case 2: binding.profile.setImageResource(R.drawable.profile2);break;
-                    case 3: binding.profile.setImageResource(R.drawable.profile3);break;
-                    case 4: binding.profile.setImageResource(R.drawable.profile4);break;
-                    case 5: binding.profile.setImageResource(R.drawable.profile5);break;
+                switch (profile) {
+                    case 1:
+                        binding.profile.setImageResource(R.drawable.profile1);
+                        break;
+                    case 2:
+                        binding.profile.setImageResource(R.drawable.profile2);
+                        break;
+                    case 3:
+                        binding.profile.setImageResource(R.drawable.profile3);
+                        break;
+                    case 4:
+                        binding.profile.setImageResource(R.drawable.profile4);
+                        break;
+                    case 5:
+                        binding.profile.setImageResource(R.drawable.profile5);
+                        break;
                 }
-                int totalH = studyTime/60;
-                int totalM = studyTime%60;
-                binding.totalTime.setText(String.format("%02d"+":"+"%02d", totalH, totalM));
+                int totalH = studyTime / 60;
+                int totalM = studyTime % 60;
+                binding.totalTime.setText(String.format("%02d" + ":" + "%02d", totalH, totalM));
                 binding.totalPlant.setText(String.valueOf(count));
             }
+
             @Override
-            public void onCancelled(@NonNull  DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
@@ -94,7 +105,8 @@ public class ProfileFragment extends Fragment {
         });
         return v;
     }
-    public void PreferencesManager(){
+
+    public void PreferencesManager() {
         SharedPreferences sf = this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
         SharedPreferences.Editor autoLogin = sf.edit();
         autoLogin.putString("inputEmail", null);

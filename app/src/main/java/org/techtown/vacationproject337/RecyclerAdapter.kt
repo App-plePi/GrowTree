@@ -9,11 +9,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(val treelist: ArrayList<Tree>) : RecyclerView.Adapter<RecyclerAdapter.CustomViewHolder>(){
+class RecyclerAdapter(val treelist: ArrayList<Tree>) :
+    RecyclerView.Adapter<RecyclerAdapter.CustomViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.CustomViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_aboutrecycler,parent,false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RecyclerAdapter.CustomViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_aboutrecycler, parent, false)
         return CustomViewHolder(view)
     }
 
@@ -26,7 +31,7 @@ class RecyclerAdapter(val treelist: ArrayList<Tree>) : RecyclerView.Adapter<Recy
         holder.tree_name1.text = treelist[position].tree_Name
     }
 
-    class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tree_name1 = itemView.findViewById<TextView>(R.id.tree_name_ly) // 나무이름
         val tree_img1 = itemView.findViewById<ImageView>(R.id.tree_img_ly) // 나무 이미지
     }
