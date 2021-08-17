@@ -1,4 +1,4 @@
-package org.techtown.vacationproject337;
+package org.techtown.vacationproject337.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import org.techtown.vacationproject337.activity.LoginActivity;
+import org.techtown.vacationproject337.R;
 
 public class SplashActivity extends AppCompatActivity {
 

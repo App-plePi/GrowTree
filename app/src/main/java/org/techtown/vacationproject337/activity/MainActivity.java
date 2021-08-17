@@ -1,4 +1,4 @@
-package org.techtown.vacationproject337;
+package org.techtown.vacationproject337.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.techtown.vacationproject337.R;
 import org.techtown.vacationproject337.fragment.AboutFragment;
 import org.techtown.vacationproject337.fragment.HomeFragment;
 import org.techtown.vacationproject337.fragment.ProfileFragment;

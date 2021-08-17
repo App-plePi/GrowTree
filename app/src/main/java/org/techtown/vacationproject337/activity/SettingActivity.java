@@ -1,4 +1,4 @@
-package org.techtown.vacationproject337;
+package org.techtown.vacationproject337.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.techtown.vacationproject337.activity.LoginActivity;
+import org.techtown.vacationproject337.R;
 import org.techtown.vacationproject337.databinding.ActivitySettingBinding;
 
 

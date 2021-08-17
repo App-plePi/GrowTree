@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.techtown.vacationproject337.activity.LoginActivity;
 import org.techtown.vacationproject337.R;
-import org.techtown.vacationproject337.SettingActivity;
+import org.techtown.vacationproject337.activity.SettingActivity;
 import org.techtown.vacationproject337.UserAccount;
 import org.techtown.vacationproject337.databinding.FragmentProfileBinding;
 
